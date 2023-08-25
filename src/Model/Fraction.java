@@ -19,10 +19,10 @@ public class Fraction {
 
     public void shorten(){
         //TODO: Kürze die Brüche. Nutze dazu die Methode getGgt.
-        if(num == 0){
+        /*if(num == 0){
             denom = 1;
             return;
-        }
+        }*/
         int tmpGgt = getGgt();
         num /= tmpGgt;
         denom /= tmpGgt;
@@ -31,6 +31,9 @@ public class Fraction {
     private int getGgt() {
         int tmpDenom= Math.abs(denom);
         int tmpNum= Math.abs(num);
+        if(tmpNum == 0){
+            return tmpDenom;
+        }
         while (tmpDenom != 0) {
             if (tmpNum > tmpDenom) {
                 tmpNum = tmpNum - tmpDenom;

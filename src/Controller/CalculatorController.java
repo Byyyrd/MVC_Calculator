@@ -35,10 +35,14 @@ public class CalculatorController {
 
     public void multiply(){
         //TODO: Schreibe den Algorithmus zur Multiplikation zweier Brüche. Das Ergebnis soll vollständig gekürzt sein.
+        result=new Fraction(f1.getNum() * f2.getNum(), f1.getDenom() * f2.getDenom());
+        result.shorten();
     }
 
     public void divide(){
         //TODO: Schreibe den Algorithmus zur Divison zweier Brüche. Das Ergebnis soll vollständig gekürzt sein.
+        result=new Fraction(f1.getNum() * f2.getDenom(), f1.getDenom() * f2.getNum());
+        result.shorten();
     }
 
     public void createFractionF1(int num, int denom){

@@ -22,10 +22,12 @@ public class CalculatorView {
     private JPanel mainPanel;
     private JButton multiplication;
     private JButton division;
+    private JButton[] jButtons;
     //TODO: Erzeuge die Buttons zur Multiplikation und Division von Brüchen
 
-    public CalculatorView(CalculatorController cC){
-        calculatorController=cC;
+    public CalculatorView(CalculatorController cC) {
+        calculatorController = cC;
+        jButtons = new JButton[]{addition, subtraction, multiplication, division};
         createButtons();
     }
 
@@ -33,55 +35,67 @@ public class CalculatorView {
         return mainPanel;
     }
 
-    private void createButtons(){
-        addition.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                addition();
-            }
-        });
-        subtraction.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                subtraction();
-            }
-        });
-        multiplication.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                multiplication();
-            }
-        });
-        division.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                division();
-            }
-        });
+    private void createButtons() {
+        for (JButton b : jButtons) {
+            b.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    mathOperation(b.getText());
+                }
+            });
+        }
 
         //TODO: Füge die ActionListener für die anderen Buttons hinzu.
     }
 
-    private void addition(){
-        calculatorController.createFractionF1(Integer.parseInt(textField1.getText()),Integer.parseInt(textField2.getText()));
-        calculatorController.createFractionF2(Integer.parseInt(textField3.getText()),Integer.parseInt(textField4.getText()));
+    private void mathOperation(String operatorString) {
+
+        calculatorController.createFractionF1(Integer.parseInt(textField1.getText()), Integer.parseInt(textField2.getText()));
+        calculatorController.createFractionF2(Integer.parseInt(textField3.getText()), Integer.parseInt(textField4.getText()));
+        switch (operatorString) {
+            case ("+") -> calculatorController.add();
+            case ("-") -> calculatorController.subtract();
+            case ("*") -> calculatorController.multiply();
+            case ("/") -> calculatorController.divide();
+        }
+        resultNum.setText(Integer.toString(calculatorController.getResult().getNum()));
+        resultDenom.setText(Integer.toString(calculatorController.getResult().getDenom()));
+        operator.setText(operatorString);
+    }
+
+    private void addition() {
+        calculatorController.createFractionF1(Integer.parseInt(textField1.getText()), Integer.parseInt(textField2.getText()));
+        calculatorController.createFractionF2(Integer.parseInt(textField3.getText()), Integer.parseInt(textField4.getText()));
         calculatorController.add();
         resultNum.setText(Integer.toString(calculatorController.getResult().getNum()));
         resultDenom.setText(Integer.toString(calculatorController.getResult().getDenom()));
         operator.setText("+");
     }
-    private void subtraction(){
-        calculatorController.createFractionF1(Integer.parseInt(textField1.getText()),Integer.parseInt(textField2.getText()));
-        calculatorController.createFractionF2(Integer.parseInt(textField3.getText()),Integer.parseInt(textField4.getText()));
+
+    private void subtraction() {
+        calculatorController.createFractionF1(Integer.parseInt(textField1.getText()), Integer.parseInt(textField2.getText()));
+        calculatorController.createFractionF2(Integer.parseInt(textField3.getText()), Integer.parseInt(textField4.getText()));
         calculatorController.subtract();
         resultNum.setText(Integer.toString(calculatorController.getResult().getNum()));
         resultDenom.setText(Integer.toString(calculatorController.getResult().getDenom()));
         operator.setText("-");
     }
-    private void multiplication(){
 
+    private void multiplication() {
+        calculatorController.createFractionF1(Integer.parseInt(textField1.getText()), Integer.parseInt(textField2.getText()));
+        calculatorController.createFractionF2(Integer.parseInt(textField3.getText()), Integer.parseInt(textField4.getText()));
+        calculatorController.multiply();
+        resultNum.setText(Integer.toString(calculatorController.getResult().getNum()));
+        resultDenom.setText(Integer.toString(calculatorController.getResult().getDenom()));
+        operator.setText("*");
     }
-    private void division(){
 
+    private void division() {
+        calculatorController.createFractionF1(Integer.parseInt(textField1.getText()), Integer.parseInt(textField2.getText()));
+        calculatorController.createFractionF2(Integer.parseInt(textField3.getText()), Integer.parseInt(textField4.getText()));
+        calculatorController.divide();
+        resultNum.setText(Integer.toString(calculatorController.getResult().getNum()));
+        resultDenom.setText(Integer.toString(calculatorController.getResult().getDenom()));
+        operator.setText("/");
     }
 }
