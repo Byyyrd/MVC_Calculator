@@ -5,6 +5,7 @@ import Controller.CalculatorController;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.annotation.Native;
 
 public class CalculatorView {
     private CalculatorController calculatorController;
@@ -22,6 +23,7 @@ public class CalculatorView {
     private JPanel mainPanel;
     private JButton multiplication;
     private JButton division;
+    private JButton shorten;
     private JButton[] jButtons;
     //TODO: Erzeuge die Buttons zur Multiplikation und Division von Brüchen
 
@@ -44,10 +46,24 @@ public class CalculatorView {
                 }
             });
         }
-
+        shorten.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                shorten();
+            }
+        });
         //TODO: Füge die ActionListener für die anderen Buttons hinzu.
     }
 
+    /**
+     * <p>
+     * Processes given Operation for fractions in textFields 1-4 and makes View display correct operator and result
+     * <p/>
+     * @author Julius
+     * @since 22.9.2023
+     * @see CalculatorController
+     * @param operatorString The operation to do as a string: +,-,*,/
+     */
     private void mathOperation(String operatorString) {
 
         calculatorController.createFractionF1(Integer.parseInt(textField1.getText()), Integer.parseInt(textField2.getText()));
@@ -62,7 +78,14 @@ public class CalculatorView {
         resultDenom.setText(Integer.toString(calculatorController.getResult().getDenom()));
         operator.setText(operatorString);
     }
+    private void shorten(){
+        calculatorController.createFractionF1(Integer.parseInt(textField1.getText()), Integer.parseInt(textField2.getText()));
+        calculatorController.shorten();
+        resultNum.setText(Integer.toString(calculatorController.getResult().getNum()));
+        resultDenom.setText(Integer.toString(calculatorController.getResult().getDenom()));
+        operator.setText("\u2658");
 
+    }
     private void addition() {
         calculatorController.createFractionF1(Integer.parseInt(textField1.getText()), Integer.parseInt(textField2.getText()));
         calculatorController.createFractionF2(Integer.parseInt(textField3.getText()), Integer.parseInt(textField4.getText()));

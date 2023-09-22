@@ -11,7 +11,10 @@ public class CalculatorController {
     public CalculatorController(){
 
     }
-
+    public void shorten(){
+        result = new Fraction(f1.getNum(), f1.getDenom());
+        result.shorten();
+    }
     public void add(){
         int factor1= f1.getDenom();
         int factor2=f2.getDenom();
@@ -23,7 +26,6 @@ public class CalculatorController {
     }
 
     public void subtract(){
-        //TODO: Schreibe den Algorithmus zum subtrahieren zweier Brüche. Das Ergebnis soll vollständig gekürzt sein.
         int factor1= f1.getDenom();
         int factor2=f2.getDenom();
 
@@ -34,13 +36,11 @@ public class CalculatorController {
     }
 
     public void multiply(){
-        //TODO: Schreibe den Algorithmus zur Multiplikation zweier Brüche. Das Ergebnis soll vollständig gekürzt sein.
         result=new Fraction(f1.getNum() * f2.getNum(), f1.getDenom() * f2.getDenom());
         result.shorten();
     }
 
     public void divide(){
-        //TODO: Schreibe den Algorithmus zur Divison zweier Brüche. Das Ergebnis soll vollständig gekürzt sein.
         result=new Fraction(f1.getNum() * f2.getDenom(), f1.getDenom() * f2.getNum());
         result.shorten();
     }
